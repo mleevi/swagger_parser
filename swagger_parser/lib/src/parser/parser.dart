@@ -622,9 +622,16 @@ class OpenApiParser {
         arrayName: name,
         root: false,
       );
+
+      
+      final arrayValueNullable =
+          map[_itemsConst][_nullableConst].toString().toBool();
+      final type =
+          arrayValueNullable ? '${arrayType.type.type}?' : arrayType.type.type;
+
       return TypeWithImport(
         type: UniversalType(
-          type: arrayType.type.type,
+          type: type,
           name: (dartKeywords.contains(name) ? '$name $_valueConst' : name)
               ?.toCamel,
           description: map[_descriptionConst]?.toString(),
